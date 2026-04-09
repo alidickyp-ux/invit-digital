@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Invitation {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  templateId    String   @default("elegant-ivory")
+
+  // Data mempelai
+  brideName     String
+  groomName     String
+  brideParents  String?
+  groomParents  String?
+  bridePhoto    String?
+  groomPhoto    String?
+
+  // Akad Nikah (terpisah dari resepsi)
+  akadDate      DateTime?
+  akadTime      String?
+  akadLocation  String?
+  akadAddress   String?
+  akadMapsUrl   String?
+
+  // Resepsi
+  eventDate     DateTime
+  eventTime     String?
+  locationName  String
+  address       String
+  mapsUrl       String?
+
+  // Media
+  heroImage     String?
+  galleryImages String[]
+  musicUrl      String?
+
+  // Fitur & Status
+  isPaid        Boolean  @default(false)
+  isPublished   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  // Fitur gift
+  giftBank1      String?   // Contoh: "BCA"
+  giftAccNo1     String?   // Contoh: "123456789"
+  giftAccName1   String?   // Contoh: "Ali Dicky P"
+  
+  giftBank2      String?   // Contoh: "DANA"
+  giftAccNo2     String?   // Contoh: "0812345678"
+  giftAccName2   String?   // Contoh: "Ali Dicky P"
+
+  // Relasi
+  rsvps         RSVP[]
+  wishes        Wish[]
+}
+
+model RSVP {
+  id            String     @id @default(cuid())
+  invitationId  String
+  guestName     String
+  status        String
+  pax           Int        @default(1)
+  message       String?
+  createdAt     DateTime   @default(now())
+
+  invitation    Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+}
+
+model Wish {
+  id            String     @id @default(cuid())
+  invitationId  String
+  name          String
+  message       String
+  createdAt     DateTime   @default(now())
+
+  invitation    Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+}

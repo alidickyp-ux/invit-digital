@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Kode CSS kamu yang lain di bawahnya tetap biarkan saja */
+@tailwind components;
+@tailwind utilities;
+
+/* MATIKAN SEMUA MARGIN & PADDING BAWAAN */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  width: 100% !important;
+  height: 100% !important;
+  overflow-x: hidden;
+  background-color: #FDFBF7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* PAKSA CONTAINER TIDAK BERFUNGSI */
+.container {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+.animate-slow-zoom {
+  animation: slow-zoom 20s infinite alternate ease-in-out;
 }
