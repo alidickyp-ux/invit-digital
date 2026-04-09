@@ -9,9 +9,9 @@ const playfair = Playfair_Display({
 const jost = Jost({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
 // Ornamen bunga SVG — persis seperti referensi
-function FlowerOrnament({ className }: { className?: string }) {
+function FlowerOrnament({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} style={style} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M100 10 C130 30 160 20 180 50 C160 40 140 55 100 40 C60 55 40 40 20 50 C40 20 70 30 100 10Z" stroke="white" strokeWidth="0.8" fill="none" opacity="0.7"/>
       <path d="M100 10 C120 50 150 70 170 100 C140 80 110 90 100 60 C90 90 60 80 30 100 C50 70 80 50 100 10Z" stroke="white" strokeWidth="0.8" fill="none" opacity="0.6"/>
       <circle cx="100" cy="80" r="25" stroke="white" strokeWidth="0.7" fill="none" opacity="0.5"/>
