@@ -142,8 +142,10 @@ export default function InvitationForm({ initialData, mode }: Props) {
         }
       }
 
-      router.push("/admin");
-      router.refresh();
+    // InvitationForm.tsx
+
+      router.refresh();   // 1. Beritahu Next.js untuk ambil data terbaru (invalidasi cache)
+      router.push("/admin"); // 2. Baru pindah ke halaman list
     } catch (err: any) {
       setError(err.message);
     } finally {
